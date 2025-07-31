@@ -29,6 +29,7 @@ export const App =()=> {
     setStudyTime("");
   }
 
+  const totalTime = Object.values(record).reduce((sum,rec) => sum + rec.time,0);
 
 
 
@@ -38,11 +39,13 @@ export const App =()=> {
     <>
     <h1>学習記録一覧</h1>
     <p>学習内容<input type="text" value={title} onChange={(event) => setTitle(event.target.value)}/></p>
-    <p>学習時間<input type="text" value={studyTime} onChange={(event) => setTime(event.target.value)}/></p>
+    <p>学習時間<input type="text" value={studyTime} onChange={(event) => setStudyTime(event.target.value)}/></p>
+        <button onClick={addRecord}>登録</button>
+
     <p>入力されている学習内容</p>
     <ul>
       {Object.keys(record).map(key => (
-       <li key={title}>
+       <li key={key}>
         {record[key].title}
       </li>
       ))}
@@ -55,8 +58,7 @@ export const App =()=> {
         {record[key].time}
       </li>
     ))}
-    <button onClick={addRecord}>登録</button>
-    <p>合計学習時間</p>
+    <p>合計学習時間:{totalTime}</p>
     </>
   )
 }
